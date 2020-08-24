@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}The Cluster App{% endblock %}
+{% block cluster_content %}
+<div class="row">
+        <div class="card col-sm-6 border-secondary mx-auto m-3 p-3 bg-light">
+            <h1 class="card-title mx-auto">The Clustering App</h1>
+            <h3 class="card-subtitle mb-2 text-muted mx-auto">A simple application to cluster some points using K-Means
+                clustering.</h3>
+                <div class="card-body">
+                    <div class="card-text">
+                        <a class="btn btn-outline-primary btn-block" href="{{url_for('custom')}}"><h4>Custom Cluster</h4></a>
+                        <a class="btn btn-outline-primary btn-block" href="{{url_for('random')}}"><h4>Random Cluster</h4></a>
+                    </div>
+                </div>
+    </div>
+</div>
+
+{% endblock %}

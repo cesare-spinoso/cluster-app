@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Custom Cluster{% endblock %}
+{% block cluster_content %}
+<a name="top"></a>
+<div class="row">
+    <div class="card col-sm-6 border border-0 mx-auto">
+        <h1>Random Cluster</h1></div>
+</div>
+<div class="row">
+    <div class="card col-sm-6 m-3 p-3 border border-secondary mx-auto bg-light">
+        <h2 class="card-title">Cluster some points!</h2>
+        <p>Select a number of points to cluster, the number of clusters and the maximum number of iterations in k-means.
+            The application will randomly generate some points and then attempt clustering them.</p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for msg in messages %}
+            <li style="color: red;">{{msg}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="" method="post"> <!-- enctype="multipart/form-data" needed? -->
+            {{ form.hidden_tag() }}
+            <p>
+                {{form.numpoints.label}} <br>
+                {{form.numpoints()}} <br>
+                {% for error in form.numpoints.errors %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{form.numclusters.label}} <br>
+                {{form.numclusters()}} <br>
+                {% for error in form.numclusters.errors %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{form.maxiter.label}} <br>
+                {{form.maxiter()}} <br>
+                {% for error in form.maxiter.errors %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{form.submit()}}
+            </p>
+        </form>
+        <a href="{{url_for('index')}}">Back to main menu.</a>
+    </div>
+</div>
+
+{% if imgs %}
+<div>
+    <div class="card col-sm-12 m-3 p-3 border border-secondary mx-auto">
+        <h2>Cluster Results</h2>
+        {% for img in imgs %}
+        <div class="mx-auto">
+            <img src="/static/images/{{img}}"
+                 alt="/static/images/{{img}}"
+                 class="img-fluid"
+                 width="720" height="500"/>
+            {% endfor %}
+        </div>
+        <a href="#top">Back to top.</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
